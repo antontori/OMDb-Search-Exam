@@ -8,6 +8,7 @@ Search the OMDb API
 - Once the results are displayed allow the user to click on any particular movie to view its details.
 - On the movie details view display the plot and other information including the poster image.
 - Make your code and UI as clean as possible, be creative.
+- *You have five business days from the moment you received the email linking to this repository to complete your task.*
 
 ## Requirements
 - You can fork this repo or make your own.
