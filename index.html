@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" type="text/css" href="styles/bootstrap.min.css">
+  <title></title>
+</head>
+
+<body>
+  <!-- component template -->
+<script type="text/x-template" id="list-template">
+	<ul class="list-group">
+  	<li class="list-group-item" v-for="movie in movies"
+    	@click="fetchMovie(movie.imdbID)"
+      :class="{ active: movie.imdbID === selectedMovie.imdbID }">
+      {{ movie.Title }}
+  	</li>
+  </ul>
+</script>
+
+<script type="text/x-template" id="detail-template">
+    <div class="thumbnail">
+    	<h3>{{movie.Title}}</h3>
+			<img v-if="movie.Poster !== 'N/A'" :src="movie.Poster">
+      <div class="caption">
+        <dl class="dl-horizontal">
+          <dt>Type:</dt>
+          <dd>{{movie.Type | capitalize}}</dd>
+          <dt>Plot:</dt>
+          <dd>{{movie.Plot}}</dd>
+          <dt>Genre:</dt>
+          <dd v-html="toLabels(movie.Genre)"></dd>
+          <dt>Runtime:</dt>
+          <dd>{{movie.Runtime}}</dd>
+          <dt>Rated:</dt>
+          <dd>{{movie.Rated}}</dd>
+          <dt>Director:</dt>
+          <dd>{{movie.Director}}</dd>
+          <dt>Writer:</dt>
+          <dd>{{movie.Writer}}</dd>
+          <dt>Actors:</dt>
+          <dd>{{movie.Actors}}</dd>
+          <dt>Language:</dt>
+          <dd>{{movie.Language}}</dd>
+          <dt>Country:</dt>
+          <dd>{{movie.Country}}</dd>
+          <dt>Awards:</dt>
+          <dd>{{movie.Awards}}</dd>
+          <dt>IMDB Rating:</dt>
+          <dd>{{movie.imdbRating}}</dd>
+        </dl>
+      </div>
+    </div>
+</script>
+
+<!-- demo root element -->
+<div id="demo" class="container">
+  <div class="panel panel-default">
+      <form id="search" class="form-horizontal panel-heading">
+      <label for="query">Search:</label>
+      <input name="query" id="query" class="form-control" placeholder="Enter Movie Title" v-model="searchQuery" @input="fetchData">
+    </form>
+
+    <movie-list
+      :movies="movies"
+      :selected-movie="selectedMovie"
+      :filter-key="searchQuery">
+    </movie-list>
+  </div>
+  <movie-detail v-if="selectedMovie"
+    :movie="selectedMovie">
+  </movie-detail>
+</div>
+<script type="text/javascript" src="scripts/libs/vue.min.js"></script>
+<script type="text/javascript" src="scripts/app.js"></script>
+</body>
+</html>
+
